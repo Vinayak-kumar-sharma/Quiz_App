@@ -1,6 +1,7 @@
 const { PrismaClient } = require('@prisma/client')
 
 const prisma = new PrismaClient()
+
 const createQuiz = async (req,res)=>{
   const{ title,description,questions } = req.body
   try {
@@ -15,12 +16,14 @@ const createQuiz = async (req,res)=>{
       }
     })
     res.status(201).json(quiz)
+    
   } catch (error) {
     res.status(400).json({
       error:error.message
     })
   }
 }
+
 const getQuizzes =async(req,res)=>{
   try {
     const quizzes = await prisma.quiz.findMany({
